@@ -1,0 +1,54 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+install.packages("tidyverse")
+```
+```{r}
+highest_earning_players
+```
+```{r}
+library(tidyverse)
+library(nycflights13)
+```
+
+
+```{r}
+mostvalue <- filter(highest_earning_players,TotalUSDPrize > 3765369.04	)
+mostvalue
+```
+
+```{r}
+ggplot(data = mostvalue) + geom_bar(mapping = aes(y = `TotalUSDPrize`, x= `NameFirst`, color = `NameLast` ,fill = `NameLast`), position = "dodge", stat = "identity") +  labs(title = "Most valuable players", x = "Player First Name" , y = "Total USD",caption = "Highest earning players")
+```
+This bar chart helps us to filter 1000 players to just 9 who are the most valuable, we can see their first name, last name, and how much money the player won in US Dollars. Also, the graph is so easy to understand since each player is a certain color. This graph is important because the data set is based on the most highest-earning players, so we want to know who they are and how much money they earned. 
+
+
+
+```{r}
+ggplot(data = mostvalue) + geom_point(mapping = aes(x = `NameFirst`, y= `CountryCode`), color = "blue") +  labs(title = "Countries of the most valuable players", x = "Player First Name" , y = "Country Code", caption = "Highest earning players")
+```
+This scatter plot helps us as figure 1 to filter the 1000 players to just 9 who are the most valuable, but in this case, since we already know their last names, we just put the first name and we added their nationality. This graph is important because we would like also to know where are they from, so we can have an idea about what countries are good in general at video games.
+
+
+```{r}
+pie <- ggplot(data = mostvalue) +
+  geom_bar(mapping = aes(y = `NameFirst`, x = `CurrentHandle`, fill = `NameLast`), position = 'dodge', stat = 'identity') + labs(title = "Players' Current Game", x = "Player First Name" , y = "Current Game", caption = "Highest earning players")
+
+pie + coord_flip()
+```
+
+
+```{r}
+pie + coord_polar()
+```
+This pie chart helps us to know what games the most valuable players are currently. This graph is important because the world would like to know what game they are into now so we can see if they still win that much money this time. We can see that now all of them play different genres.
+
+
+```{r}
+ggplot(mostvalue, aes(NameFirst, Genre, group = 1)) +
+         geom_line(color = "Red") +  labs(title = "Most valuable players' Genre", x = "Player First Name" , y = "Genre", caption = "Highest earning players")
+```
+As we already know what players are the most valuable and where are they from. We would like to know what genre they played and we can see that all of them are part of Multiplayer Online Battle Arena. This graph is important because we can conclude that just one game gave the world the most valuable players. It is really impressive.
+
