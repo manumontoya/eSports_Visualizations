@@ -1,0 +1,49 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+ 
+
+```{r}
+install.packages("tidyverse")
+install.packages("readr")
+```
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+library(readr)
+```
+
+```{r}
+data <- highest_earning_players
+```
+
+```{r}
+mostvalue <- filter(highest_earning_players,TotalUSDPrize > 3765369.04	)
+mostvalue
+```
+
+```{r}
+ggplot(data = mostvalue) + geom_histogram(mapping = aes(x = NameFirst, y = TotalUSDPrize),position = "dodge", stat = "identity", fill = "red") + labs(title = "Most valuable players", x = "Player First Name", y = "Total USD", caption = "Highest earning players")
+```
+This graph helps us to see how much could each player and understand why they are most valuable players. It is the most important graph since the data set is based on this, but we filtered to just 9 players so we could really see specifically who are they.
+
+```{r}
+ggplot(data = mostvalue, mapping = aes(x = PlayerId , y = TotalUSDPrize)) + geom_violin(fill = "blue", color = "black")+ labs(title = "Total USD of players", subtitle = "By ID number", x = "TotalUSD", y = "Total USD", caption = "Highest earning players")
+```
+The violin plot helps us to see the distribution of the data, for this reason, we can conclude that the highest average of how much money these 9 players won is around 5300000 and the lowest media is around 6800000.
+
+```{r}
+boxplot <- filter(highest_earning_players,TotalUSDPrize > 3765369.04	)
+boxplot
+```
+
+```{r}
+ggplot(data = highest_earning_players, mapping = aes(x =TotalUSDPrize, y = Genre)) + geom_boxplot()+ labs(title = "Genre Vs. Total USD", x = "Total USD", y = "Genre", caption = "Highest earning players")
+```
+Boxplots graphs are so useful to make predictions and conclude something quick, because it basically gives you the the minumun, maximun and the mean, it also gives you the data distrution visually, i mean it tell you what is consider normal data or outliers data. Som in this graph fastly we can see that the genre which players could earn a lot a of money is "Multiplayer Online Battle Arena", meanwhile the genre "Collectible Card Game" it was not that succesfull. 
