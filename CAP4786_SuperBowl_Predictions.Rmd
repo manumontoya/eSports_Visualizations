@@ -1,0 +1,52 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+install.packages("tidyverse")
+install.packages("readr")
+```
+```{r}
+library(tidyverse)
+library(readr)
+```
+
+```{r}
+superbowl
+```
+```{r}
+winners <- select(superbowl,'Date','Winner','Loser')
+winners
+```
+
+```{r}
+last10winners <- head(winners,n =11)
+last10winners
+```
+```{r}
+ggplot(data = last10winners) + geom_bar(mapping = aes(y = `Winner`),position = "dodge", fill = "blue") + labs(title = "SuperBowl Champions For The Last 10 Years", subtitle = "2010-2020", caption = "Kaggle: Superbowl History 1967 - 2020")
+```
+
+```{r}
+ggplot(data = last10winners) + geom_bar(mapping = aes(y = `Loser`),position = "dodge", fill = "red") + labs(title = "SuperBowl Losers in the final game For The Last 10 Years", subtitle = "2010-2020", caption = "Kaggle: Superbowl History 1967 - 2020")
+```
+
+```{r}
+Offense_SuperBowl
+```
+```{r}
+ggplot(data = Offense_SuperBowl) +
+  geom_bar(mapping = aes(y = `TEAM`, x = `YDS/G`), stat = "identity", fill = "orange") + labs(title = "SuperBowl Offense Yards per Game", subtitle = "Season 2021", caption = "ESPN: NFL Team Total Offense Regular Season Stats 2021")
+```
+```{r}
+Defense_SuperBowl
+```
+```{r}
+ggplot(data = Defense_SuperBowl) +
+  geom_bar(mapping = aes(y = `TEAM`, x = `YDS/G`), stat = "identity", fill = "green") + labs(title = "SuperBowl Defense Yards per Game", subtitle = "Season 2021", caption = "ESPN: NFL Team Total Defense Regular Season Stats 2021")
+```
+
+
+
+
