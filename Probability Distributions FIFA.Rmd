@@ -1,0 +1,71 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+install.packages("tidyverse")
+```
+
+```{r}
+library(tidyverse)
+```
+#Print the data set
+```{r}
+results
+```
+#Filter the data for the FIFA World Cup in 2018
+```{r}
+WorldCup2018 <- filter(results, tournament == "FIFA World Cup", country == "Russia")
+WorldCup2018
+```
+# Question 1: What average of goals did the home team make in games won?
+
+## Filter the data with wins of the home team
+```{r}
+homeTeamWins <- filter(WorldCup2018, home_score > away_score)
+homeTeamWins
+```
+##Get the mean, median and range of home score
+```{r}
+summary(homeTeamWins)
+```
+##Histogram 1
+```{r}
+ggplot(data = homeTeamWins) + geom_histogram(mapping = aes(x = home_score, fill = home_team), color = "black",bins = 15) + labs(title = "Home Team Wins Number of Goals", subtitle = "FIFA World Cup 2018", x = "Number of Goals", y = "Repeated Score", caption = "Kaggle Data Set")
+```
+
+#Question 2: What average of goals did the away team make in games won?
+
+## Filter the data with wins of the away team
+```{r}
+awayTeamWins <- filter(last10Years, home_score < away_score)
+awayTeamWins
+```
+##Get the mean, median and range of away score
+```{r}
+summary(awayTeamWins)
+```
+
+##Histogram 2
+```{r}
+ ggplot(data = awayTeamWins) + geom_histogram(mapping = aes(x = away_score, fill = away_team), color = "black",bins = 15) + labs(title = "Away Team Wins Number of Goals", subtitle = "FIFA World Cup 2018", x = "Number of Goals", y = "Repeated Score", caption = "Kaggle Data Set")
+```
+#Question 3: What is the average goal difference of the home team wins?
+
+## Add a variable called difference of goals
+```{r}
+GoalDifferenceHome<- mutate(homeTeamWins, goal_difference = home_score - away_score)
+GoalDifferenceHome
+```
+##Get the mean, median and range of goal difference
+```{r}
+summary(GoalDifferenceHome)
+```
+
+##Histogram 3
+```{r}
+ggplot(data = GoalDifferenceHome) + geom_histogram(mapping = aes(x = goal_difference, fill = home_team), color = "black",bins = 15) + labs(title = "Away Team Wins Number of Goals", subtitle = "FIFA World Cup 2018", x = "Difference of Goals", y = "Repeated Difference", caption = "Kaggle Data Set")
+```
+
+
+
